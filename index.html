@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Generator</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background:
+                radial-gradient(circle at top left, #263c68, transparent 35%),
+                radial-gradient(circle at bottom right, #44235f, transparent 35%),
+                #080b14;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #aeb6ca;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 25px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .card h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .result {
+            min-height: 80px;
+            background: rgba(0,0,0,0.25);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 15px;
+            margin-bottom: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            word-break: break-word;
+        }
+
+        .quote {
+            font-size: 17px;
+            line-height: 1.5;
+        }
+
+        button {
+            width: 100%;
+            border: none;
+            padding: 13px;
+            border-radius: 12px;
+            background: white;
+            color: #10131c;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.03);
+            background: #dfe5ff;
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+
+        .color-box {
+            min-height: 80px;
+            border-radius: 14px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            text-shadow: 0 1px 5px black;
+        }
+
+        .footer {
+            text-align: center;
+            color: #687188;
+            margin-top: 25px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 650px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+            <h1>🎲 Random Generator</h1>
+            <p>Klik tombolnya dan lihat apa yang keluar 👀</p>
+        </div>
+
+        <div class="cards">
+
+            <!-- ANGKA -->
+            <div class="card">
+                <h2>🔢 Random Number</h2>
+
+                <div class="result" id="number">
+                    ?
+                </div>
+
+                <button onclick="randomNumber()">
+                    GENERATE
+                </button>
+            </div>
+
+            <!-- NAMA -->
+            <div class="card">
+                <h2>👤 Random Name</h2>
+
+                <div class="result" id="name">
+                    ?
+                </div>
+
+                <button onclick="randomName()">
+                    GENERATE
+                </button>
+            </div>
+
+            <!-- WARNA -->
+            <div class="card">
+                <h2>🎨 Random Color</h2>
+
+                <div class="color-box" id="color">
+                    #
+                </div>
+
+                <button onclick="randomColor()">
+                    GENERATE
+                </button>
+            </div>
+
+            <!-- QUOTE -->
+            <div class="card">
+                <h2>💭 Random Quote</h2>
+
+                <div class="result quote" id="quote">
+                    Klik generate...
+                </div>
+
+                <button onclick="randomQuote()">
+                    GENERATE
+                </button>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            Random Generator • Made with HTML, CSS & JavaScript
+        </div>
+
+    </div>
+
+
+    <script>
+
+        // RANDOM NUMBER
+        function randomNumber() {
+
+            const number =
+                Math.floor(Math.random() * 1000) + 1;
+
+            const element =
+                document.getElementById("number");
+
+            element.textContent = number;
+        }
+
+
+        // RANDOM NAME
+        function randomName() {
+
+            const names = [
+                "Ridho",
+                "Andi",
+                "Budi",
+                "Rizky",
+                "Fajar",
+                "Dimas",
+                "Rafi",
+                "Adit",
+                "Fikri",
+                "Yoga",
+                "Raka",
+                "Ilham",
+                "Bagas",
+                "Ardi",
+                "Kevin"
+            ];
+
+            const random =
+                Math.floor(Math.random() * names.length);
+
+            document.getElementById("name").textContent =
+                names[random];
+        }
+
+
+        // RANDOM COLOR
+        function randomColor() {
+
+            const letters =
+                "0123456789ABCDEF";
+
+            let color = "#";
+
+            for (let i = 0; i < 6; i++) {
+
+                color +=
+                    letters[
+                        Math.floor(
+                            Math.random() * 16
+                        )
+                    ];
+            }
+
+            const element =
+                document.getElementById("color");
+
+            element.style.background = color;
+
+            element.textContent = color;
+        }
+
+
+        // RANDOM QUOTE
+        function randomQuote() {
+
+            const quotes = [
+                "Jangan takut gagal, takutlah tidak mencoba.",
+                "Sedikit demi sedikit, lama-lama menjadi bukit.",
+                "Belajar hari ini untuk menjadi lebih baik besok.",
+                "Kalau bisa dikerjakan sekarang, kenapa harus nanti?",
+                "Tetap jalan walaupun pelan.",
+                "Tidak ada proses yang sia-sia.",
+                "Fokus pada proses, hasil akan mengikuti.",
+                "Jangan bandingkan prosesmu dengan orang lain.",
+                "Kesempatan datang kepada mereka yang siap.",
+                "Progress kecil tetaplah progress."
+            ];
+
+            const random =
+                Math.floor(
+                    Math.random() * quotes.length
+                );
+
+            document.getElementById("quote").textContent =
+                `"${quotes[random]}"`;
+        }
+
+    </script>
+
+</body>
+</html>
